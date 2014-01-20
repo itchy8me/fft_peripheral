@@ -1,0 +1,64 @@
+	multadd1 : multadd
+		PORT MAP(clk_in, X1R,  X1R, X1I, X1I, sub_wire_0);
+	sqrt1 : sqrt
+		PORT MAP(clk_in, sub_wire_1, sub_wire_2);
+	multadd2 : multadd
+		PORT MAP(clk_in, X2R,  X2R, X2I, X2I, sub_wire_3);
+	sqrt2 : sqrt
+		PORT MAP(clk_in, sub_wire_4, sub_wire_5);
+	multadd3 : multadd
+		PORT MAP(clk_in, X3R,  X3R, X3I, X3I, sub_wire_6);
+	sqrt3 : sqrt
+		PORT MAP(clk_in, sub_wire_7, sub_wire_8);
+	multadd4 : multadd
+		PORT MAP(clk_in, X4R,  X4R, X4I, X4I, sub_wire_9);
+	sqrt4 : sqrt
+		PORT MAP(clk_in, sub_wire_10, sub_wire_11);
+	multadd5 : multadd
+		PORT MAP(clk_in, X5R,  X5R, X5I, X5I, sub_wire_12);
+	sqrt5 : sqrt
+		PORT MAP(clk_in, sub_wire_13, sub_wire_14);
+	multadd6 : multadd
+		PORT MAP(clk_in, X6R,  X6R, X6I, X6I, sub_wire_15);
+	sqrt6 : sqrt
+		PORT MAP(clk_in, sub_wire_16, sub_wire_17);
+	multadd7 : multadd
+		PORT MAP(clk_in, X7R,  X7R, X7I, X7I, sub_wire_18);
+	sqrt7 : sqrt
+		PORT MAP(clk_in, sub_wire_19, sub_wire_20);
+	multadd8 : multadd
+		PORT MAP(clk_in, X8R,  X8R, X8I, X8I, sub_wire_21);
+	sqrt8 : sqrt
+		PORT MAP(clk_in, sub_wire_22, sub_wire_23);
+	multadd9 : multadd
+		PORT MAP(clk_in, X9R,  X9R, X9I, X9I, sub_wire_24);
+	sqrt9 : sqrt
+		PORT MAP(clk_in, sub_wire_25, sub_wire_26);
+	multadd10 : multadd
+		PORT MAP(clk_in, X10R,  X10R, X10I, X10I, sub_wire_27);
+	sqrt10 : sqrt
+		PORT MAP(clk_in, sub_wire_28, sub_wire_29);
+	multadd11 : multadd
+		PORT MAP(clk_in, X11R,  X11R, X11I, X11I, sub_wire_30);
+	sqrt11 : sqrt
+		PORT MAP(clk_in, sub_wire_31, sub_wire_32);
+	multadd12 : multadd
+		PORT MAP(clk_in, X12R,  X12R, X12I, X12I, sub_wire_33);
+	sqrt12 : sqrt
+		PORT MAP(clk_in, sub_wire_34, sub_wire_35);
+	multadd13 : multadd
+		PORT MAP(clk_in, X13R,  X13R, X13I, X13I, sub_wire_36);
+	sqrt13 : sqrt
+		PORT MAP(clk_in, sub_wire_37, sub_wire_38);
+	multadd14 : multadd
+		PORT MAP(clk_in, X14R,  X14R, X14I, X14I, sub_wire_39);
+	sqrt14 : sqrt
+		PORT MAP(clk_in, sub_wire_40, sub_wire_41);
+	multadd15 : multadd
+		PORT MAP(clk_in, X15R,  X15R, X15I, X15I, sub_wire_42);
+	sqrt15 : sqrt
+		PORT MAP(clk_in, sub_wire_43, sub_wire_44);
+	multadd16 : multadd
+		PORT MAP(clk_in, X16R,  X16R, X16I, X16I, sub_wire_45);
+	sqrt16 : sqrt
+		PORT MAP(clk_in, sub_wire_46, sub_wire_47);
