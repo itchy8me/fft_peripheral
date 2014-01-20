@@ -42,6 +42,7 @@ USE altera_mf.all;
 ENTITY sqrt IS
 	PORT
 	(
+		clk		: IN STD_LOGIC ;
 		radical		: IN STD_LOGIC_VECTOR (20 DOWNTO 0);
 		q		: OUT STD_LOGIC_VECTOR (10 DOWNTO 0);
 		remainder		: OUT STD_LOGIC_VECTOR (11 DOWNTO 0)
@@ -65,6 +66,7 @@ ARCHITECTURE SYN OF sqrt IS
 		lpm_type		: STRING
 	);
 	PORT (
+			clk	: IN STD_LOGIC ;
 			q	: OUT STD_LOGIC_VECTOR (10 DOWNTO 0);
 			radical	: IN STD_LOGIC_VECTOR (20 DOWNTO 0);
 			remainder	: OUT STD_LOGIC_VECTOR (11 DOWNTO 0)
@@ -77,13 +79,14 @@ BEGIN
 
 	ALTSQRT_component : ALTSQRT
 	GENERIC MAP (
-		pipeline => 0,
+		pipeline => 1,
 		q_port_width => 11,
 		r_port_width => 12,
 		width => 21,
 		lpm_type => "ALTSQRT"
 	)
 	PORT MAP (
+		clk => clk,
 		radical => radical,
 		q => sub_wire0,
 		remainder => sub_wire1
@@ -99,19 +102,21 @@ END SYN;
 -- Retrieval info: PRIVATE: INTENDED_DEVICE_FAMILY STRING "Cyclone III"
 -- Retrieval info: PRIVATE: SYNTH_WRAPPER_GEN_POSTFIX STRING "0"
 -- Retrieval info: LIBRARY: altera_mf altera_mf.altera_mf_components.all
--- Retrieval info: CONSTANT: PIPELINE NUMERIC "0"
+-- Retrieval info: CONSTANT: PIPELINE NUMERIC "1"
 -- Retrieval info: CONSTANT: Q_PORT_WIDTH NUMERIC "11"
 -- Retrieval info: CONSTANT: R_PORT_WIDTH NUMERIC "12"
 -- Retrieval info: CONSTANT: WIDTH NUMERIC "21"
+-- Retrieval info: USED_PORT: clk 0 0 0 0 INPUT NODEFVAL "clk"
 -- Retrieval info: USED_PORT: q 0 0 11 0 OUTPUT NODEFVAL "q[10..0]"
 -- Retrieval info: USED_PORT: radical 0 0 21 0 INPUT NODEFVAL "radical[20..0]"
 -- Retrieval info: USED_PORT: remainder 0 0 12 0 OUTPUT NODEFVAL "remainder[11..0]"
+-- Retrieval info: CONNECT: @clk 0 0 0 0 clk 0 0 0 0
 -- Retrieval info: CONNECT: @radical 0 0 21 0 radical 0 0 21 0
 -- Retrieval info: CONNECT: q 0 0 11 0 @q 0 0 11 0
 -- Retrieval info: CONNECT: remainder 0 0 12 0 @remainder 0 0 12 0
 -- Retrieval info: GEN_FILE: TYPE_NORMAL sqrt.vhd TRUE
 -- Retrieval info: GEN_FILE: TYPE_NORMAL sqrt.inc FALSE
 -- Retrieval info: GEN_FILE: TYPE_NORMAL sqrt.cmp TRUE
--- Retrieval info: GEN_FILE: TYPE_NORMAL sqrt.bsf FALSE
+-- Retrieval info: GEN_FILE: TYPE_NORMAL sqrt.bsf TRUE
 -- Retrieval info: GEN_FILE: TYPE_NORMAL sqrt_inst.vhd FALSE
 -- Retrieval info: LIB_FILE: altera_mf

@@ -43,7 +43,7 @@
 //     32 RAMs (256 words, 20 bits per word)
 //     16 ROMs (2048 words, 10 bits per word)
 
-// Generated on Mon Dec 16 15:46:40 EST 2013
+// Generated on Mon Jan 20 03:34:32 EST 2014
 
 // Latency: 1563 clock cycles
 // Throughput: 1 transform every 1431 cycles
@@ -78,401 +78,6 @@
 // Please note: when simulating floating point code, you must include
 // Xilinx's DSP slice simulation module.
 
-
-module dft_testbench();
-   reg clk, reset, next;
-   wire next_out;
-   integer i, j, k, l, m;
-   reg [15:0] counter;
-   reg [9:0] in [31:0];
-   wire [9:0] X0;
-   wire [9:0] Y0;
-   wire [9:0] X1;
-   wire [9:0] Y1;
-   wire [9:0] X2;
-   wire [9:0] Y2;
-   wire [9:0] X3;
-   wire [9:0] Y3;
-   wire [9:0] X4;
-   wire [9:0] Y4;
-   wire [9:0] X5;
-   wire [9:0] Y5;
-   wire [9:0] X6;
-   wire [9:0] Y6;
-   wire [9:0] X7;
-   wire [9:0] Y7;
-   wire [9:0] X8;
-   wire [9:0] Y8;
-   wire [9:0] X9;
-   wire [9:0] Y9;
-   wire [9:0] X10;
-   wire [9:0] Y10;
-   wire [9:0] X11;
-   wire [9:0] Y11;
-   wire [9:0] X12;
-   wire [9:0] Y12;
-   wire [9:0] X13;
-   wire [9:0] Y13;
-   wire [9:0] X14;
-   wire [9:0] Y14;
-   wire [9:0] X15;
-   wire [9:0] Y15;
-   wire [9:0] X16;
-   wire [9:0] Y16;
-   wire [9:0] X17;
-   wire [9:0] Y17;
-   wire [9:0] X18;
-   wire [9:0] Y18;
-   wire [9:0] X19;
-   wire [9:0] Y19;
-   wire [9:0] X20;
-   wire [9:0] Y20;
-   wire [9:0] X21;
-   wire [9:0] Y21;
-   wire [9:0] X22;
-   wire [9:0] Y22;
-   wire [9:0] X23;
-   wire [9:0] Y23;
-   wire [9:0] X24;
-   wire [9:0] Y24;
-   wire [9:0] X25;
-   wire [9:0] Y25;
-   wire [9:0] X26;
-   wire [9:0] Y26;
-   wire [9:0] X27;
-   wire [9:0] Y27;
-   wire [9:0] X28;
-   wire [9:0] Y28;
-   wire [9:0] X29;
-   wire [9:0] Y29;
-   wire [9:0] X30;
-   wire [9:0] Y30;
-   wire [9:0] X31;
-   wire [9:0] Y31;
-   reg clrCnt;
-   assign X0 = in[0];
-   assign X1 = in[1];
-   assign X2 = in[2];
-   assign X3 = in[3];
-   assign X4 = in[4];
-   assign X5 = in[5];
-   assign X6 = in[6];
-   assign X7 = in[7];
-   assign X8 = in[8];
-   assign X9 = in[9];
-   assign X10 = in[10];
-   assign X11 = in[11];
-   assign X12 = in[12];
-   assign X13 = in[13];
-   assign X14 = in[14];
-   assign X15 = in[15];
-   assign X16 = in[16];
-   assign X17 = in[17];
-   assign X18 = in[18];
-   assign X19 = in[19];
-   assign X20 = in[20];
-   assign X21 = in[21];
-   assign X22 = in[22];
-   assign X23 = in[23];
-   assign X24 = in[24];
-   assign X25 = in[25];
-   assign X26 = in[26];
-   assign X27 = in[27];
-   assign X28 = in[28];
-   assign X29 = in[29];
-   assign X30 = in[30];
-   assign X31 = in[31];
-
-   initial clk = 0;
-
-   always #10000 clk = ~clk;
-
-
-   // Instantiate top-level module of core 'X' signals are system inputs
-   // and 'Y' signals are system outputs
-   dft_top dft_top_instance (.clk(clk), .reset(reset), .next(next), .next_out(next_out),
-    .X0(X0), .Y0(Y0),
-    .X1(X1), .Y1(Y1),
-    .X2(X2), .Y2(Y2),
-    .X3(X3), .Y3(Y3),
-    .X4(X4), .Y4(Y4),
-    .X5(X5), .Y5(Y5),
-    .X6(X6), .Y6(Y6),
-    .X7(X7), .Y7(Y7),
-    .X8(X8), .Y8(Y8),
-    .X9(X9), .Y9(Y9),
-    .X10(X10), .Y10(Y10),
-    .X11(X11), .Y11(Y11),
-    .X12(X12), .Y12(Y12),
-    .X13(X13), .Y13(Y13),
-    .X14(X14), .Y14(Y14),
-    .X15(X15), .Y15(Y15),
-    .X16(X16), .Y16(Y16),
-    .X17(X17), .Y17(Y17),
-    .X18(X18), .Y18(Y18),
-    .X19(X19), .Y19(Y19),
-    .X20(X20), .Y20(Y20),
-    .X21(X21), .Y21(Y21),
-    .X22(X22), .Y22(Y22),
-    .X23(X23), .Y23(Y23),
-    .X24(X24), .Y24(Y24),
-    .X25(X25), .Y25(Y25),
-    .X26(X26), .Y26(Y26),
-    .X27(X27), .Y27(Y27),
-    .X28(X28), .Y28(Y28),
-    .X29(X29), .Y29(Y29),
-    .X30(X30), .Y30(Y30),
-    .X31(X31), .Y31(Y31));
-
-   // You can use this counter to verify that the gap and latency are as expected.
-   always @(posedge clk) begin
-      if (clrCnt) counter <= 0;
-      else counter <= counter+1;
-   end
-
-
-   initial begin
-      @(posedge clk);
-      @(posedge clk);
-
-      // On the next cycle, begin loading input vector.
-      next <= 1;
-      clrCnt <= 1;
-      @(posedge clk);
-      clrCnt <= 0;
-      next <= 0;
-
-      // The 2048 complex data points enter the system over 128 cycles
-      for (j=0; j < 127; j = j+1) begin
-          // Input: 16 complex words per cycle
-         for (k=0; k < 32; k = k+1) begin
-            in[k] <= j*32 + k;
-         end
-         @(posedge clk);
-      end
-      j = 127;
-      for (k=0; k < 32; k = k+1) begin
-         in[k] <= j*32 + k;
-      end
-
-
-      @(posedge clk);
-      // Wait until the next data vector can be entered
-      while (counter < 1429)
-        @(posedge clk);
-
-      // On the next cycle, we will start the next data vector
-      next <= 1;
-      clrCnt <= 1;
-      @(posedge clk);
-      clrCnt <= 0;
-      next <= 0;
-
-      // Start entering next input vector
-      for (j=0; j < 127; j = j+1) begin
-         // Input 32 words per cycle
-         for (k=0; k < 32; k = k+1) begin
-            in[k] <= 4096 + j*32 + k;
-          end
-          @(posedge clk);
-       end
-       j = 127;
-       for (k=0; k < 32; k = k+1) begin
-          in[k] <= 4096 + j*32 + k;
-       end
-   end
-
-
-   initial begin
-      // set initial values
-      in[0] <= 0;
-      in[1] <= 0;
-      in[2] <= 0;
-      in[3] <= 0;
-      in[4] <= 0;
-      in[5] <= 0;
-      in[6] <= 0;
-      in[7] <= 0;
-      in[8] <= 0;
-      in[9] <= 0;
-      in[10] <= 0;
-      in[11] <= 0;
-      in[12] <= 0;
-      in[13] <= 0;
-      in[14] <= 0;
-      in[15] <= 0;
-      in[16] <= 0;
-      in[17] <= 0;
-      in[18] <= 0;
-      in[19] <= 0;
-      in[20] <= 0;
-      in[21] <= 0;
-      in[22] <= 0;
-      in[23] <= 0;
-      in[24] <= 0;
-      in[25] <= 0;
-      in[26] <= 0;
-      in[27] <= 0;
-      in[28] <= 0;
-      in[29] <= 0;
-      in[30] <= 0;
-      in[31] <= 0;
-      next <= 0;
-      reset <= 0;
-
-      @(posedge clk);
-      reset <= 1;
-      @(posedge clk);
-      reset <= 0;
-      @(posedge clk);
-      @(posedge clk);
-      // Wait until next_out goes high, then wait one clock cycle and begin receiving data
-      @(posedge next_out);
-      @(posedge clk); #1;
-      $display("--- begin output 1---");
-
-      for (m=0; m < 127; m=m+1) begin
-         $display("%x", Y0);
-         $display("%x", Y1);
-         $display("%x", Y2);
-         $display("%x", Y3);
-         $display("%x", Y4);
-         $display("%x", Y5);
-         $display("%x", Y6);
-         $display("%x", Y7);
-         $display("%x", Y8);
-         $display("%x", Y9);
-         $display("%x", Y10);
-         $display("%x", Y11);
-         $display("%x", Y12);
-         $display("%x", Y13);
-         $display("%x", Y14);
-         $display("%x", Y15);
-         $display("%x", Y16);
-         $display("%x", Y17);
-         $display("%x", Y18);
-         $display("%x", Y19);
-         $display("%x", Y20);
-         $display("%x", Y21);
-         $display("%x", Y22);
-         $display("%x", Y23);
-         $display("%x", Y24);
-         $display("%x", Y25);
-         $display("%x", Y26);
-         $display("%x", Y27);
-         $display("%x", Y28);
-         $display("%x", Y29);
-         $display("%x", Y30);
-         $display("%x", Y31);
-         @(posedge clk); #1;
-      end
-      $display("%x", Y0);
-      $display("%x", Y1);
-      $display("%x", Y2);
-      $display("%x", Y3);
-      $display("%x", Y4);
-      $display("%x", Y5);
-      $display("%x", Y6);
-      $display("%x", Y7);
-      $display("%x", Y8);
-      $display("%x", Y9);
-      $display("%x", Y10);
-      $display("%x", Y11);
-      $display("%x", Y12);
-      $display("%x", Y13);
-      $display("%x", Y14);
-      $display("%x", Y15);
-      $display("%x", Y16);
-      $display("%x", Y17);
-      $display("%x", Y18);
-      $display("%x", Y19);
-      $display("%x", Y20);
-      $display("%x", Y21);
-      $display("%x", Y22);
-      $display("%x", Y23);
-      $display("%x", Y24);
-      $display("%x", Y25);
-      $display("%x", Y26);
-      $display("%x", Y27);
-      $display("%x", Y28);
-      $display("%x", Y29);
-      $display("%x", Y30);
-      $display("%x", Y31);
-      // Wait until next_out goes high, then wait one clock cycle and begin receiving data
-      @(posedge next_out);
-      @(posedge clk); #1;
-      $display("--- begin output 2---");
-
-      for (m=0; m < 127; m=m+1) begin
-         $display("%x", Y0);
-         $display("%x", Y1);
-         $display("%x", Y2);
-         $display("%x", Y3);
-         $display("%x", Y4);
-         $display("%x", Y5);
-         $display("%x", Y6);
-         $display("%x", Y7);
-         $display("%x", Y8);
-         $display("%x", Y9);
-         $display("%x", Y10);
-         $display("%x", Y11);
-         $display("%x", Y12);
-         $display("%x", Y13);
-         $display("%x", Y14);
-         $display("%x", Y15);
-         $display("%x", Y16);
-         $display("%x", Y17);
-         $display("%x", Y18);
-         $display("%x", Y19);
-         $display("%x", Y20);
-         $display("%x", Y21);
-         $display("%x", Y22);
-         $display("%x", Y23);
-         $display("%x", Y24);
-         $display("%x", Y25);
-         $display("%x", Y26);
-         $display("%x", Y27);
-         $display("%x", Y28);
-         $display("%x", Y29);
-         $display("%x", Y30);
-         $display("%x", Y31);
-         @(posedge clk); #1;
-      end
-      $display("%x", Y0);
-      $display("%x", Y1);
-      $display("%x", Y2);
-      $display("%x", Y3);
-      $display("%x", Y4);
-      $display("%x", Y5);
-      $display("%x", Y6);
-      $display("%x", Y7);
-      $display("%x", Y8);
-      $display("%x", Y9);
-      $display("%x", Y10);
-      $display("%x", Y11);
-      $display("%x", Y12);
-      $display("%x", Y13);
-      $display("%x", Y14);
-      $display("%x", Y15);
-      $display("%x", Y16);
-      $display("%x", Y17);
-      $display("%x", Y18);
-      $display("%x", Y19);
-      $display("%x", Y20);
-      $display("%x", Y21);
-      $display("%x", Y22);
-      $display("%x", Y23);
-      $display("%x", Y24);
-      $display("%x", Y25);
-      $display("%x", Y26);
-      $display("%x", Y27);
-      $display("%x", Y28);
-      $display("%x", Y29);
-      $display("%x", Y30);
-      $display("%x", Y31);
-      $finish;
-   end
-endmodule
 
 // Latency: 1563
 // Gap: 1431
@@ -746,7 +351,7 @@ module dft_top(clk, reset, next, next_out,
    assign next_out = next_2;
 
 // latency=132, gap=128
-   rc99144 stage0(.clk(clk), .reset(reset), .next(next_0), .next_out(next_1),
+   rc71225 stage0(.clk(clk), .reset(reset), .next(next_0), .next_out(next_1),
     .X0(t0_0), .Y0(t1_0),
     .X1(t0_1), .Y1(t1_1),
     .X2(t0_2), .Y2(t1_2),
@@ -782,7 +387,7 @@ module dft_top(clk, reset, next, next_out,
 
 
 // latency=1431, gap=1431
-   ICompose_104774 IComposeInst106569(.next(next_1), .clk(clk), .reset(reset), .next_out(next_2),
+   ICompose_76855 IComposeInst78650(.next(next_1), .clk(clk), .reset(reset), .next_out(next_2),
        .X0(t1_0), .Y0(t2_0),
        .X1(t1_1), .Y1(t2_1),
        .X2(t1_2), .Y2(t2_2),
@@ -821,7 +426,7 @@ endmodule
 
 // Latency: 132
 // Gap: 128
-module rc99144(clk, reset, next, next_out,
+module rc71225(clk, reset, next, next_out,
    X0, Y0,
    X1, Y1,
    X2, Y2,
@@ -1005,7 +610,7 @@ module rc99144(clk, reset, next, next_out,
    assign Y30 = s15[19:10];
    assign Y31 = s15[9:0];
 
-   perm99142 instPerm106570(.x0(t0), .y0(s0),
+   perm71223 instPerm78651(.x0(t0), .y0(s0),
     .x1(t1), .y1(s1),
     .x2(t2), .y2(s2),
     .x3(t3), .y3(s3),
@@ -1030,7 +635,7 @@ endmodule
 
 // Latency: 132
 // Gap: 128
-module perm99142(clk, next, reset, next_out,
+module perm71223(clk, next, reset, next_out,
    x0, y0,
    x1, y1,
    x2, y2,
@@ -1819,13 +1424,13 @@ module perm99142(clk, next, reset, next_out,
    assign outAddr_a15[5] = addr15c[9];
    assign outAddr_a15[6] = addr15c[10];
 
-   nextReg #(124, 7) nextReg_106575(.X(next), .Y(next0), .reset(reset), .clk(clk));
+   nextReg #(124, 7) nextReg_78656(.X(next), .Y(next0), .reset(reset), .clk(clk));
 
 
-   shiftRegFIFO #(8, 1) shiftFIFO_106578(.X(next0), .Y(next_out), .clk(clk));
+   shiftRegFIFO #(8, 1) shiftFIFO_78659(.X(next0), .Y(next_out), .clk(clk));
 
 
-   memArray2048_99142 #(numBanks, logBanks, depth, logDepth, width)
+   memArray2048_71223 #(numBanks, logBanks, depth, logDepth, width)
      memSys(.inFlip(inFlip3), .outFlip(outFlip3), .next(next), .reset(reset),
         .x0(w_4_0[width+logDepth-1:logDepth]), .y0(ybuff0),
         .inAddr0(w_4_0[logDepth-1:0]),
@@ -2519,7 +2124,7 @@ module perm99142(clk, next, reset, next_out,
     switch #(logDepth) rdaddr_sw_3_7(.x0(u_3_14_pipe), .x1(u_3_15_pipe), .y0(u_4_14), .y1(u_4_15), .ctrl(rda_ctrl_st_3));
 endmodule
 
-module memArray2048_99142(next, reset,
+module memArray2048_71223(next, reset,
                 x0, y0,
                 inAddr0,
                 outAddr0,
@@ -2628,7 +2233,7 @@ module memArray2048_99142(next, reset,
    input [width-1:0]   x15;
    output [width-1:0]  y15;
    input [logDepth-1:0] inAddr15, outAddr15;
-   nextReg #(128, 7) nextReg_106583(.X(next), .Y(next0), .reset(reset), .clk(clk));
+   nextReg #(128, 7) nextReg_78664(.X(next), .Y(next0), .reset(reset), .clk(clk));
 
 
    memMod #(depth*2, width, logDepth+1) 
@@ -2788,7 +2393,7 @@ endmodule
 
 // Latency: 1431
 // Gap: 1431
-module ICompose_104774(clk, reset, next, next_out,
+module ICompose_76855(clk, reset, next, next_out,
       X0, Y0,
       X1, Y1,
       X2, Y2,
@@ -2999,7 +2604,7 @@ module ICompose_104774(clk, reset, next, next_out,
    wire int_next_out;
    reg [4:0] i1;
 
-   statementList104772 instList106588 (.clk(clk), .reset(reset), .next(int_next), .next_out(int_next_out),
+   statementList76853 instList78669 (.clk(clk), .reset(reset), .next(int_next), .next_out(int_next_out),
       .i1_in(i1),
     .X0(s0), .Y0(t0),
     .X1(s1), .Y1(t1),
@@ -3342,7 +2947,7 @@ endmodule
 
 // Latency: 129
 // Gap: 128
-module statementList104772(clk, reset, next, next_out,
+module statementList76853(clk, reset, next, next_out,
    i1_in,
    X0, Y0,
    X1, Y1,
@@ -3651,7 +3256,7 @@ module statementList104772(clk, reset, next, next_out,
    assign i1_0 = i1_in;
 
 // latency=11, gap=128
-   DirSum_104171 DirSumInst106591(.next(next_0), .clk(clk), .reset(reset), .next_out(next_1),
+   DirSum_76252 DirSumInst78672(.next(next_0), .clk(clk), .reset(reset), .next_out(next_1),
 .i1(i1_0),
        .X0(t0_0), .Y0(t1_0),
        .X1(t0_1), .Y1(t1_1),
@@ -3688,7 +3293,7 @@ module statementList104772(clk, reset, next, next_out,
 
 
 // latency=2, gap=128
-   codeBlock104173 codeBlockIsnt106592(.clk(clk), .reset(reset), .next(next_1), .next_out(next_2),
+   codeBlock76254 codeBlockIsnt78673(.clk(clk), .reset(reset), .next_in(next_1), .next_out(next_2),
        .X0_in(t1_0), .Y0(t2_0),
        .X1_in(t1_1), .Y1(t2_1),
        .X2_in(t1_2), .Y2(t2_2),
@@ -3724,7 +3329,7 @@ module statementList104772(clk, reset, next, next_out,
 
 
 // latency=116, gap=128
-   rc104770 instrc106593(.clk(clk), .reset(reset), .next(next_2), .next_out(next_3),
+   rc76851 instrc78674(.clk(clk), .reset(reset), .next(next_2), .next_out(next_3),
     .X0(t2_0), .Y0(t3_0),
     .X1(t2_1), .Y1(t3_1),
     .X2(t2_2), .Y2(t3_2),
@@ -3763,7 +3368,7 @@ endmodule
 
 // Latency: 11
 // Gap: 128
-module DirSum_104171(clk, reset, next, next_out,
+module DirSum_76252(clk, reset, next, next_out,
       i1,
       X0, Y0,
       X1, Y1,
@@ -3884,7 +3489,7 @@ module DirSum_104171(clk, reset, next, next_out,
       end
    end
 
-   codeBlock99146 codeBlockIsnt106594(.clk(clk), .reset(reset), .next(next), .next_out(next_out),
+   codeBlock71227 codeBlockIsnt78675(.clk(clk), .reset(reset), .next_in(next), .next_out(next_out),
 .i2_in(i2),
 .i1_in(i1),
        .X0_in(X0), .Y0(Y0),
@@ -3922,7 +3527,7 @@ module DirSum_104171(clk, reset, next, next_out,
 
 endmodule
 
-module D1_102119(addr, out, clk);
+module D1_74200(addr, out, clk);
    input clk;
    output [9:0] out;
    reg [9:0] out, out2, out3;
@@ -5988,7 +5593,7 @@ endmodule
 
 
 
-module D2_104169(addr, out, clk);
+module D2_76250(addr, out, clk);
    input clk;
    output [9:0] out;
    reg [9:0] out, out2, out3;
@@ -8056,7 +7661,7 @@ endmodule
 
 // Latency: 11
 // Gap: 1
-module codeBlock99146(clk, reset, next, next_out,
+module codeBlock71227(clk, reset, next_in, next_out,
    i2_in,
    i1_in,
    X0_in, Y0,
@@ -8093,7 +7698,7 @@ module codeBlock99146(clk, reset, next, next_out,
    X31_in, Y31);
 
    output next_out;
-   input clk, reset, next;
+   input clk, reset, next_in;
 
    reg next;
    input [6:0] i2_in;
@@ -8200,7 +7805,7 @@ module codeBlock99146(clk, reset, next, next_out,
       Y30,
       Y31;
 
-   shiftRegFIFO #(10, 1) shiftFIFO_106597(.X(next), .Y(next_out), .clk(clk));
+   shiftRegFIFO #(10, 1) shiftFIFO_78678(.X(next), .Y(next_out), .clk(clk));
 
 
    wire  [10:0] a450;
@@ -8721,102 +8326,102 @@ module codeBlock99146(clk, reset, next, next_out,
    assign Y28 = tm480;
    assign Y29 = tm490;
 
-   D1_102119 instD1inst0_102119(.addr(a456[10:0]), .out(tm5), .clk(clk));
+   D1_74200 instD1inst0_74200(.addr(a456[10:0]), .out(tm5), .clk(clk));
 
-   D1_102119 instD1inst1_102119(.addr(a466[10:0]), .out(tm9), .clk(clk));
+   D1_74200 instD1inst1_74200(.addr(a466[10:0]), .out(tm9), .clk(clk));
 
-   D1_102119 instD1inst2_102119(.addr(a476[10:0]), .out(tm13), .clk(clk));
+   D1_74200 instD1inst2_74200(.addr(a476[10:0]), .out(tm13), .clk(clk));
 
-   D1_102119 instD1inst3_102119(.addr(a486[10:0]), .out(tm17), .clk(clk));
+   D1_74200 instD1inst3_74200(.addr(a486[10:0]), .out(tm17), .clk(clk));
 
-   D1_102119 instD1inst4_102119(.addr(a496[10:0]), .out(tm21), .clk(clk));
+   D1_74200 instD1inst4_74200(.addr(a496[10:0]), .out(tm21), .clk(clk));
 
-   D1_102119 instD1inst5_102119(.addr(a506[10:0]), .out(tm25), .clk(clk));
+   D1_74200 instD1inst5_74200(.addr(a506[10:0]), .out(tm25), .clk(clk));
 
-   D1_102119 instD1inst6_102119(.addr(a516[10:0]), .out(tm29), .clk(clk));
+   D1_74200 instD1inst6_74200(.addr(a516[10:0]), .out(tm29), .clk(clk));
 
-   D1_102119 instD1inst7_102119(.addr(a526[10:0]), .out(tm33), .clk(clk));
+   D1_74200 instD1inst7_74200(.addr(a526[10:0]), .out(tm33), .clk(clk));
 
-   D2_104169 instD2inst0_104169(.addr(a456[10:0]), .out(tm6), .clk(clk));
+   D2_76250 instD2inst0_76250(.addr(a456[10:0]), .out(tm6), .clk(clk));
 
-   D2_104169 instD2inst1_104169(.addr(a466[10:0]), .out(tm10), .clk(clk));
+   D2_76250 instD2inst1_76250(.addr(a466[10:0]), .out(tm10), .clk(clk));
 
-   D2_104169 instD2inst2_104169(.addr(a476[10:0]), .out(tm14), .clk(clk));
+   D2_76250 instD2inst2_76250(.addr(a476[10:0]), .out(tm14), .clk(clk));
 
-   D2_104169 instD2inst3_104169(.addr(a486[10:0]), .out(tm18), .clk(clk));
+   D2_76250 instD2inst3_76250(.addr(a486[10:0]), .out(tm18), .clk(clk));
 
-   D2_104169 instD2inst4_104169(.addr(a496[10:0]), .out(tm22), .clk(clk));
+   D2_76250 instD2inst4_76250(.addr(a496[10:0]), .out(tm22), .clk(clk));
 
-   D2_104169 instD2inst5_104169(.addr(a506[10:0]), .out(tm26), .clk(clk));
+   D2_76250 instD2inst5_76250(.addr(a506[10:0]), .out(tm26), .clk(clk));
 
-   D2_104169 instD2inst6_104169(.addr(a516[10:0]), .out(tm30), .clk(clk));
+   D2_76250 instD2inst6_76250(.addr(a516[10:0]), .out(tm30), .clk(clk));
 
-   D2_104169 instD2inst7_104169(.addr(a526[10:0]), .out(tm34), .clk(clk));
+   D2_76250 instD2inst7_76250(.addr(a526[10:0]), .out(tm34), .clk(clk));
 
-    addfxp #(12, 1) add99165(.a({1'b0, a450}), .b({11'b0, tm1}), .clk(clk), .q(a451));    // 0
-    addfxp #(12, 1) add99290(.a({1'b0, a450}), .b({10'b0, tm7}), .clk(clk), .q(a463));    // 0
-    addfxp #(12, 1) add99403(.a({1'b0, a450}), .b({9'b0, tm11}), .clk(clk), .q(a473));    // 0
-    addfxp #(12, 1) add99516(.a({1'b0, a450}), .b({9'b0, tm15}), .clk(clk), .q(a483));    // 0
-    addfxp #(12, 1) add99629(.a({1'b0, a450}), .b({8'b0, tm19}), .clk(clk), .q(a493));    // 0
-    addfxp #(12, 1) add99742(.a({1'b0, a450}), .b({8'b0, tm23}), .clk(clk), .q(a503));    // 0
-    addfxp #(12, 1) add99855(.a({1'b0, a450}), .b({8'b0, tm27}), .clk(clk), .q(a513));    // 0
-    addfxp #(12, 1) add99968(.a({1'b0, a450}), .b({8'b0, tm31}), .clk(clk), .q(a523));    // 0
-    subfxp #(12, 1) sub99196(.a({1'b0, a455}), .b({1'b0, tm4}), .clk(clk), .q(a456));    // 2
-    subfxp #(12, 1) sub99309(.a({1'b0, a465}), .b({1'b0, tm4}), .clk(clk), .q(a466));    // 2
-    subfxp #(12, 1) sub99422(.a({1'b0, a475}), .b({1'b0, tm4}), .clk(clk), .q(a476));    // 2
-    subfxp #(12, 1) sub99535(.a({1'b0, a485}), .b({1'b0, tm4}), .clk(clk), .q(a486));    // 2
-    subfxp #(12, 1) sub99648(.a({1'b0, a495}), .b({1'b0, tm4}), .clk(clk), .q(a496));    // 2
-    subfxp #(12, 1) sub99761(.a({1'b0, a505}), .b({1'b0, tm4}), .clk(clk), .q(a506));    // 2
-    subfxp #(12, 1) sub99874(.a({1'b0, a515}), .b({1'b0, tm4}), .clk(clk), .q(a516));    // 2
-    subfxp #(12, 1) sub99987(.a({1'b0, a525}), .b({1'b0, tm4}), .clk(clk), .q(a526));    // 2
-    multfix #(10, 2) m99218(.a(tm35), .b(tm106), .clk(clk), .q_sc(a458), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99240(.a(tm36), .b(tm113), .clk(clk), .q_sc(a460), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99257(.a(tm36), .b(tm106), .clk(clk), .q_sc(a461), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99268(.a(tm35), .b(tm113), .clk(clk), .q_sc(a462), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99331(.a(tm39), .b(tm135), .clk(clk), .q_sc(a468), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99353(.a(tm40), .b(tm142), .clk(clk), .q_sc(a470), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99370(.a(tm40), .b(tm135), .clk(clk), .q_sc(a471), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99381(.a(tm39), .b(tm142), .clk(clk), .q_sc(a472), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99444(.a(tm43), .b(tm164), .clk(clk), .q_sc(a478), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99466(.a(tm44), .b(tm171), .clk(clk), .q_sc(a480), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99483(.a(tm44), .b(tm164), .clk(clk), .q_sc(a481), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99494(.a(tm43), .b(tm171), .clk(clk), .q_sc(a482), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99557(.a(tm47), .b(tm193), .clk(clk), .q_sc(a488), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99579(.a(tm48), .b(tm200), .clk(clk), .q_sc(a490), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99596(.a(tm48), .b(tm193), .clk(clk), .q_sc(a491), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99607(.a(tm47), .b(tm200), .clk(clk), .q_sc(a492), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99670(.a(tm51), .b(tm222), .clk(clk), .q_sc(a498), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99692(.a(tm52), .b(tm229), .clk(clk), .q_sc(a500), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99709(.a(tm52), .b(tm222), .clk(clk), .q_sc(a501), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99720(.a(tm51), .b(tm229), .clk(clk), .q_sc(a502), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99783(.a(tm55), .b(tm251), .clk(clk), .q_sc(a508), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99805(.a(tm56), .b(tm258), .clk(clk), .q_sc(a510), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99822(.a(tm56), .b(tm251), .clk(clk), .q_sc(a511), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99833(.a(tm55), .b(tm258), .clk(clk), .q_sc(a512), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99896(.a(tm59), .b(tm280), .clk(clk), .q_sc(a518), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99918(.a(tm60), .b(tm287), .clk(clk), .q_sc(a520), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99935(.a(tm60), .b(tm280), .clk(clk), .q_sc(a521), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m99946(.a(tm59), .b(tm287), .clk(clk), .q_sc(a522), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m100009(.a(tm63), .b(tm309), .clk(clk), .q_sc(a528), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m100031(.a(tm64), .b(tm316), .clk(clk), .q_sc(a530), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m100048(.a(tm64), .b(tm309), .clk(clk), .q_sc(a531), .q_unsc(), .rst(reset));
-    multfix #(10, 2) m100059(.a(tm63), .b(tm316), .clk(clk), .q_sc(a532), .q_unsc(), .rst(reset));
-    subfxp #(10, 1) sub99246(.a(a458), .b(a460), .clk(clk), .q(Y2));    // 9
-    addfxp #(10, 1) add99275(.a(a461), .b(a462), .clk(clk), .q(Y3));    // 9
-    subfxp #(10, 1) sub99359(.a(a468), .b(a470), .clk(clk), .q(Y6));    // 9
-    addfxp #(10, 1) add99388(.a(a471), .b(a472), .clk(clk), .q(Y7));    // 9
-    subfxp #(10, 1) sub99472(.a(a478), .b(a480), .clk(clk), .q(Y10));    // 9
-    addfxp #(10, 1) add99501(.a(a481), .b(a482), .clk(clk), .q(Y11));    // 9
-    subfxp #(10, 1) sub99585(.a(a488), .b(a490), .clk(clk), .q(Y14));    // 9
-    addfxp #(10, 1) add99614(.a(a491), .b(a492), .clk(clk), .q(Y15));    // 9
-    subfxp #(10, 1) sub99698(.a(a498), .b(a500), .clk(clk), .q(Y18));    // 9
-    addfxp #(10, 1) add99727(.a(a501), .b(a502), .clk(clk), .q(Y19));    // 9
-    subfxp #(10, 1) sub99811(.a(a508), .b(a510), .clk(clk), .q(Y22));    // 9
-    addfxp #(10, 1) add99840(.a(a511), .b(a512), .clk(clk), .q(Y23));    // 9
-    subfxp #(10, 1) sub99924(.a(a518), .b(a520), .clk(clk), .q(Y26));    // 9
-    addfxp #(10, 1) add99953(.a(a521), .b(a522), .clk(clk), .q(Y27));    // 9
-    subfxp #(10, 1) sub100037(.a(a528), .b(a530), .clk(clk), .q(Y30));    // 9
-    addfxp #(10, 1) add100066(.a(a531), .b(a532), .clk(clk), .q(Y31));    // 9
+    addfxp #(12, 1) add71246(.a({1'b0, a450}), .b({11'b0, tm1}), .clk(clk), .q(a451));    // 0
+    addfxp #(12, 1) add71371(.a({1'b0, a450}), .b({10'b0, tm7}), .clk(clk), .q(a463));    // 0
+    addfxp #(12, 1) add71484(.a({1'b0, a450}), .b({9'b0, tm11}), .clk(clk), .q(a473));    // 0
+    addfxp #(12, 1) add71597(.a({1'b0, a450}), .b({9'b0, tm15}), .clk(clk), .q(a483));    // 0
+    addfxp #(12, 1) add71710(.a({1'b0, a450}), .b({8'b0, tm19}), .clk(clk), .q(a493));    // 0
+    addfxp #(12, 1) add71823(.a({1'b0, a450}), .b({8'b0, tm23}), .clk(clk), .q(a503));    // 0
+    addfxp #(12, 1) add71936(.a({1'b0, a450}), .b({8'b0, tm27}), .clk(clk), .q(a513));    // 0
+    addfxp #(12, 1) add72049(.a({1'b0, a450}), .b({8'b0, tm31}), .clk(clk), .q(a523));    // 0
+    subfxp #(12, 1) sub71277(.a({1'b0, a455}), .b({1'b0, tm4}), .clk(clk), .q(a456));    // 2
+    subfxp #(12, 1) sub71390(.a({1'b0, a465}), .b({1'b0, tm4}), .clk(clk), .q(a466));    // 2
+    subfxp #(12, 1) sub71503(.a({1'b0, a475}), .b({1'b0, tm4}), .clk(clk), .q(a476));    // 2
+    subfxp #(12, 1) sub71616(.a({1'b0, a485}), .b({1'b0, tm4}), .clk(clk), .q(a486));    // 2
+    subfxp #(12, 1) sub71729(.a({1'b0, a495}), .b({1'b0, tm4}), .clk(clk), .q(a496));    // 2
+    subfxp #(12, 1) sub71842(.a({1'b0, a505}), .b({1'b0, tm4}), .clk(clk), .q(a506));    // 2
+    subfxp #(12, 1) sub71955(.a({1'b0, a515}), .b({1'b0, tm4}), .clk(clk), .q(a516));    // 2
+    subfxp #(12, 1) sub72068(.a({1'b0, a525}), .b({1'b0, tm4}), .clk(clk), .q(a526));    // 2
+    multfix #(10, 2) m71299(.a(tm35), .b(tm106), .clk(clk), .q_sc(a458), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71321(.a(tm36), .b(tm113), .clk(clk), .q_sc(a460), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71338(.a(tm36), .b(tm106), .clk(clk), .q_sc(a461), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71349(.a(tm35), .b(tm113), .clk(clk), .q_sc(a462), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71412(.a(tm39), .b(tm135), .clk(clk), .q_sc(a468), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71434(.a(tm40), .b(tm142), .clk(clk), .q_sc(a470), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71451(.a(tm40), .b(tm135), .clk(clk), .q_sc(a471), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71462(.a(tm39), .b(tm142), .clk(clk), .q_sc(a472), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71525(.a(tm43), .b(tm164), .clk(clk), .q_sc(a478), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71547(.a(tm44), .b(tm171), .clk(clk), .q_sc(a480), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71564(.a(tm44), .b(tm164), .clk(clk), .q_sc(a481), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71575(.a(tm43), .b(tm171), .clk(clk), .q_sc(a482), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71638(.a(tm47), .b(tm193), .clk(clk), .q_sc(a488), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71660(.a(tm48), .b(tm200), .clk(clk), .q_sc(a490), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71677(.a(tm48), .b(tm193), .clk(clk), .q_sc(a491), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71688(.a(tm47), .b(tm200), .clk(clk), .q_sc(a492), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71751(.a(tm51), .b(tm222), .clk(clk), .q_sc(a498), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71773(.a(tm52), .b(tm229), .clk(clk), .q_sc(a500), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71790(.a(tm52), .b(tm222), .clk(clk), .q_sc(a501), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71801(.a(tm51), .b(tm229), .clk(clk), .q_sc(a502), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71864(.a(tm55), .b(tm251), .clk(clk), .q_sc(a508), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71886(.a(tm56), .b(tm258), .clk(clk), .q_sc(a510), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71903(.a(tm56), .b(tm251), .clk(clk), .q_sc(a511), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71914(.a(tm55), .b(tm258), .clk(clk), .q_sc(a512), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71977(.a(tm59), .b(tm280), .clk(clk), .q_sc(a518), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m71999(.a(tm60), .b(tm287), .clk(clk), .q_sc(a520), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m72016(.a(tm60), .b(tm280), .clk(clk), .q_sc(a521), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m72027(.a(tm59), .b(tm287), .clk(clk), .q_sc(a522), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m72090(.a(tm63), .b(tm309), .clk(clk), .q_sc(a528), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m72112(.a(tm64), .b(tm316), .clk(clk), .q_sc(a530), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m72129(.a(tm64), .b(tm309), .clk(clk), .q_sc(a531), .q_unsc(), .rst(reset));
+    multfix #(10, 2) m72140(.a(tm63), .b(tm316), .clk(clk), .q_sc(a532), .q_unsc(), .rst(reset));
+    subfxp #(10, 1) sub71327(.a(a458), .b(a460), .clk(clk), .q(Y2));    // 9
+    addfxp #(10, 1) add71356(.a(a461), .b(a462), .clk(clk), .q(Y3));    // 9
+    subfxp #(10, 1) sub71440(.a(a468), .b(a470), .clk(clk), .q(Y6));    // 9
+    addfxp #(10, 1) add71469(.a(a471), .b(a472), .clk(clk), .q(Y7));    // 9
+    subfxp #(10, 1) sub71553(.a(a478), .b(a480), .clk(clk), .q(Y10));    // 9
+    addfxp #(10, 1) add71582(.a(a481), .b(a482), .clk(clk), .q(Y11));    // 9
+    subfxp #(10, 1) sub71666(.a(a488), .b(a490), .clk(clk), .q(Y14));    // 9
+    addfxp #(10, 1) add71695(.a(a491), .b(a492), .clk(clk), .q(Y15));    // 9
+    subfxp #(10, 1) sub71779(.a(a498), .b(a500), .clk(clk), .q(Y18));    // 9
+    addfxp #(10, 1) add71808(.a(a501), .b(a502), .clk(clk), .q(Y19));    // 9
+    subfxp #(10, 1) sub71892(.a(a508), .b(a510), .clk(clk), .q(Y22));    // 9
+    addfxp #(10, 1) add71921(.a(a511), .b(a512), .clk(clk), .q(Y23));    // 9
+    subfxp #(10, 1) sub72005(.a(a518), .b(a520), .clk(clk), .q(Y26));    // 9
+    addfxp #(10, 1) add72034(.a(a521), .b(a522), .clk(clk), .q(Y27));    // 9
+    subfxp #(10, 1) sub72118(.a(a528), .b(a530), .clk(clk), .q(Y30));    // 9
+    addfxp #(10, 1) add72147(.a(a531), .b(a532), .clk(clk), .q(Y31));    // 9
 
 
    always @(posedge clk) begin
@@ -8921,7 +8526,7 @@ module codeBlock99146(clk, reset, next, next_out,
          X29 <= X29_in;
          X30 <= X30_in;
          X31 <= X31_in;
-         next <= next;
+         next <= next_in;
          tm99 <= a453;
          tm100 <= a533;
          tm107 <= a534;
@@ -9225,7 +8830,7 @@ endmodule
 
 // Latency: 2
 // Gap: 1
-module codeBlock104173(clk, reset, next, next_out,
+module codeBlock76254(clk, reset, next_in, next_out,
    X0_in, Y0,
    X1_in, Y1,
    X2_in, Y2,
@@ -9260,7 +8865,7 @@ module codeBlock104173(clk, reset, next, next_out,
    X31_in, Y31);
 
    output next_out;
-   input clk, reset, next;
+   input clk, reset, next_in;
 
    reg next;
 
@@ -9363,7 +8968,7 @@ module codeBlock104173(clk, reset, next, next_out,
       Y30,
       Y31;
 
-   shiftRegFIFO #(1, 1) shiftFIFO_106600(.X(next), .Y(next_out), .clk(clk));
+   shiftRegFIFO #(1, 1) shiftFIFO_78681(.X(next), .Y(next_out), .clk(clk));
 
 
    wire signed [9:0] a65;
@@ -9593,38 +9198,38 @@ module codeBlock104173(clk, reset, next, next_out,
    assign t199 = tm97[10:1];
    assign t200 = tm98[10:1];
 
-    addfxp #(11, 1) add104185(.a({{1{a65[9]}}, a65}), .b({{1{a66[9]}}, a66}), .clk(clk), .q(tm67));    // 0
-    addfxp #(11, 1) add104200(.a({{1{a67[9]}}, a67}), .b({{1{a68[9]}}, a68}), .clk(clk), .q(tm68));    // 0
-    subfxp #(11, 1) sub104214(.a({{1{a65[9]}}, a65}), .b({{1{a66[9]}}, a66}), .clk(clk), .q(tm69));    // 0
-    subfxp #(11, 1) sub104228(.a({{1{a67[9]}}, a67}), .b({{1{a68[9]}}, a68}), .clk(clk), .q(tm70));    // 0
-    addfxp #(11, 1) add104259(.a({{1{a73[9]}}, a73}), .b({{1{a74[9]}}, a74}), .clk(clk), .q(tm71));    // 0
-    addfxp #(11, 1) add104274(.a({{1{a75[9]}}, a75}), .b({{1{a76[9]}}, a76}), .clk(clk), .q(tm72));    // 0
-    subfxp #(11, 1) sub104288(.a({{1{a73[9]}}, a73}), .b({{1{a74[9]}}, a74}), .clk(clk), .q(tm73));    // 0
-    subfxp #(11, 1) sub104302(.a({{1{a75[9]}}, a75}), .b({{1{a76[9]}}, a76}), .clk(clk), .q(tm74));    // 0
-    addfxp #(11, 1) add104333(.a({{1{a81[9]}}, a81}), .b({{1{a82[9]}}, a82}), .clk(clk), .q(tm75));    // 0
-    addfxp #(11, 1) add104348(.a({{1{a83[9]}}, a83}), .b({{1{a84[9]}}, a84}), .clk(clk), .q(tm76));    // 0
-    subfxp #(11, 1) sub104362(.a({{1{a81[9]}}, a81}), .b({{1{a82[9]}}, a82}), .clk(clk), .q(tm77));    // 0
-    subfxp #(11, 1) sub104376(.a({{1{a83[9]}}, a83}), .b({{1{a84[9]}}, a84}), .clk(clk), .q(tm78));    // 0
-    addfxp #(11, 1) add104407(.a({{1{a89[9]}}, a89}), .b({{1{a90[9]}}, a90}), .clk(clk), .q(tm79));    // 0
-    addfxp #(11, 1) add104422(.a({{1{a91[9]}}, a91}), .b({{1{a92[9]}}, a92}), .clk(clk), .q(tm80));    // 0
-    subfxp #(11, 1) sub104436(.a({{1{a89[9]}}, a89}), .b({{1{a90[9]}}, a90}), .clk(clk), .q(tm81));    // 0
-    subfxp #(11, 1) sub104450(.a({{1{a91[9]}}, a91}), .b({{1{a92[9]}}, a92}), .clk(clk), .q(tm82));    // 0
-    addfxp #(11, 1) add104481(.a({{1{a97[9]}}, a97}), .b({{1{a98[9]}}, a98}), .clk(clk), .q(tm83));    // 0
-    addfxp #(11, 1) add104496(.a({{1{a99[9]}}, a99}), .b({{1{a100[9]}}, a100}), .clk(clk), .q(tm84));    // 0
-    subfxp #(11, 1) sub104510(.a({{1{a97[9]}}, a97}), .b({{1{a98[9]}}, a98}), .clk(clk), .q(tm85));    // 0
-    subfxp #(11, 1) sub104524(.a({{1{a99[9]}}, a99}), .b({{1{a100[9]}}, a100}), .clk(clk), .q(tm86));    // 0
-    addfxp #(11, 1) add104555(.a({{1{a105[9]}}, a105}), .b({{1{a106[9]}}, a106}), .clk(clk), .q(tm87));    // 0
-    addfxp #(11, 1) add104570(.a({{1{a107[9]}}, a107}), .b({{1{a108[9]}}, a108}), .clk(clk), .q(tm88));    // 0
-    subfxp #(11, 1) sub104584(.a({{1{a105[9]}}, a105}), .b({{1{a106[9]}}, a106}), .clk(clk), .q(tm89));    // 0
-    subfxp #(11, 1) sub104598(.a({{1{a107[9]}}, a107}), .b({{1{a108[9]}}, a108}), .clk(clk), .q(tm90));    // 0
-    addfxp #(11, 1) add104629(.a({{1{a113[9]}}, a113}), .b({{1{a114[9]}}, a114}), .clk(clk), .q(tm91));    // 0
-    addfxp #(11, 1) add104644(.a({{1{a115[9]}}, a115}), .b({{1{a116[9]}}, a116}), .clk(clk), .q(tm92));    // 0
-    subfxp #(11, 1) sub104658(.a({{1{a113[9]}}, a113}), .b({{1{a114[9]}}, a114}), .clk(clk), .q(tm93));    // 0
-    subfxp #(11, 1) sub104672(.a({{1{a115[9]}}, a115}), .b({{1{a116[9]}}, a116}), .clk(clk), .q(tm94));    // 0
-    addfxp #(11, 1) add104703(.a({{1{a121[9]}}, a121}), .b({{1{a122[9]}}, a122}), .clk(clk), .q(tm95));    // 0
-    addfxp #(11, 1) add104718(.a({{1{a123[9]}}, a123}), .b({{1{a124[9]}}, a124}), .clk(clk), .q(tm96));    // 0
-    subfxp #(11, 1) sub104732(.a({{1{a121[9]}}, a121}), .b({{1{a122[9]}}, a122}), .clk(clk), .q(tm97));    // 0
-    subfxp #(11, 1) sub104746(.a({{1{a123[9]}}, a123}), .b({{1{a124[9]}}, a124}), .clk(clk), .q(tm98));    // 0
+    addfxp #(11, 1) add76266(.a({{1{a65[9]}}, a65}), .b({{1{a66[9]}}, a66}), .clk(clk), .q(tm67));    // 0
+    addfxp #(11, 1) add76281(.a({{1{a67[9]}}, a67}), .b({{1{a68[9]}}, a68}), .clk(clk), .q(tm68));    // 0
+    subfxp #(11, 1) sub76295(.a({{1{a65[9]}}, a65}), .b({{1{a66[9]}}, a66}), .clk(clk), .q(tm69));    // 0
+    subfxp #(11, 1) sub76309(.a({{1{a67[9]}}, a67}), .b({{1{a68[9]}}, a68}), .clk(clk), .q(tm70));    // 0
+    addfxp #(11, 1) add76340(.a({{1{a73[9]}}, a73}), .b({{1{a74[9]}}, a74}), .clk(clk), .q(tm71));    // 0
+    addfxp #(11, 1) add76355(.a({{1{a75[9]}}, a75}), .b({{1{a76[9]}}, a76}), .clk(clk), .q(tm72));    // 0
+    subfxp #(11, 1) sub76369(.a({{1{a73[9]}}, a73}), .b({{1{a74[9]}}, a74}), .clk(clk), .q(tm73));    // 0
+    subfxp #(11, 1) sub76383(.a({{1{a75[9]}}, a75}), .b({{1{a76[9]}}, a76}), .clk(clk), .q(tm74));    // 0
+    addfxp #(11, 1) add76414(.a({{1{a81[9]}}, a81}), .b({{1{a82[9]}}, a82}), .clk(clk), .q(tm75));    // 0
+    addfxp #(11, 1) add76429(.a({{1{a83[9]}}, a83}), .b({{1{a84[9]}}, a84}), .clk(clk), .q(tm76));    // 0
+    subfxp #(11, 1) sub76443(.a({{1{a81[9]}}, a81}), .b({{1{a82[9]}}, a82}), .clk(clk), .q(tm77));    // 0
+    subfxp #(11, 1) sub76457(.a({{1{a83[9]}}, a83}), .b({{1{a84[9]}}, a84}), .clk(clk), .q(tm78));    // 0
+    addfxp #(11, 1) add76488(.a({{1{a89[9]}}, a89}), .b({{1{a90[9]}}, a90}), .clk(clk), .q(tm79));    // 0
+    addfxp #(11, 1) add76503(.a({{1{a91[9]}}, a91}), .b({{1{a92[9]}}, a92}), .clk(clk), .q(tm80));    // 0
+    subfxp #(11, 1) sub76517(.a({{1{a89[9]}}, a89}), .b({{1{a90[9]}}, a90}), .clk(clk), .q(tm81));    // 0
+    subfxp #(11, 1) sub76531(.a({{1{a91[9]}}, a91}), .b({{1{a92[9]}}, a92}), .clk(clk), .q(tm82));    // 0
+    addfxp #(11, 1) add76562(.a({{1{a97[9]}}, a97}), .b({{1{a98[9]}}, a98}), .clk(clk), .q(tm83));    // 0
+    addfxp #(11, 1) add76577(.a({{1{a99[9]}}, a99}), .b({{1{a100[9]}}, a100}), .clk(clk), .q(tm84));    // 0
+    subfxp #(11, 1) sub76591(.a({{1{a97[9]}}, a97}), .b({{1{a98[9]}}, a98}), .clk(clk), .q(tm85));    // 0
+    subfxp #(11, 1) sub76605(.a({{1{a99[9]}}, a99}), .b({{1{a100[9]}}, a100}), .clk(clk), .q(tm86));    // 0
+    addfxp #(11, 1) add76636(.a({{1{a105[9]}}, a105}), .b({{1{a106[9]}}, a106}), .clk(clk), .q(tm87));    // 0
+    addfxp #(11, 1) add76651(.a({{1{a107[9]}}, a107}), .b({{1{a108[9]}}, a108}), .clk(clk), .q(tm88));    // 0
+    subfxp #(11, 1) sub76665(.a({{1{a105[9]}}, a105}), .b({{1{a106[9]}}, a106}), .clk(clk), .q(tm89));    // 0
+    subfxp #(11, 1) sub76679(.a({{1{a107[9]}}, a107}), .b({{1{a108[9]}}, a108}), .clk(clk), .q(tm90));    // 0
+    addfxp #(11, 1) add76710(.a({{1{a113[9]}}, a113}), .b({{1{a114[9]}}, a114}), .clk(clk), .q(tm91));    // 0
+    addfxp #(11, 1) add76725(.a({{1{a115[9]}}, a115}), .b({{1{a116[9]}}, a116}), .clk(clk), .q(tm92));    // 0
+    subfxp #(11, 1) sub76739(.a({{1{a113[9]}}, a113}), .b({{1{a114[9]}}, a114}), .clk(clk), .q(tm93));    // 0
+    subfxp #(11, 1) sub76753(.a({{1{a115[9]}}, a115}), .b({{1{a116[9]}}, a116}), .clk(clk), .q(tm94));    // 0
+    addfxp #(11, 1) add76784(.a({{1{a121[9]}}, a121}), .b({{1{a122[9]}}, a122}), .clk(clk), .q(tm95));    // 0
+    addfxp #(11, 1) add76799(.a({{1{a123[9]}}, a123}), .b({{1{a124[9]}}, a124}), .clk(clk), .q(tm96));    // 0
+    subfxp #(11, 1) sub76813(.a({{1{a121[9]}}, a121}), .b({{1{a122[9]}}, a122}), .clk(clk), .q(tm97));    // 0
+    subfxp #(11, 1) sub76827(.a({{1{a123[9]}}, a123}), .b({{1{a124[9]}}, a124}), .clk(clk), .q(tm98));    // 0
 
 
    always @(posedge clk) begin
@@ -9663,14 +9268,14 @@ module codeBlock104173(clk, reset, next, next_out,
          X29 <= X29_in;
          X30 <= X30_in;
          X31 <= X31_in;
-         next <= next;
+         next <= next_in;
       end
    end
 endmodule
 
 // Latency: 116
 // Gap: 128
-module rc104770(clk, reset, next, next_out,
+module rc76851(clk, reset, next, next_out,
    X0, Y0,
    X1, Y1,
    X2, Y2,
@@ -9854,7 +9459,7 @@ module rc104770(clk, reset, next, next_out,
    assign Y30 = s15[19:10];
    assign Y31 = s15[9:0];
 
-   perm104768 instPerm106601(.x0(t0), .y0(s0),
+   perm76849 instPerm78682(.x0(t0), .y0(s0),
     .x1(t1), .y1(s1),
     .x2(t2), .y2(s2),
     .x3(t3), .y3(s3),
@@ -9879,7 +9484,7 @@ endmodule
 
 // Latency: 116
 // Gap: 128
-module perm104768(clk, next, reset, next_out,
+module perm76849(clk, next, reset, next_out,
    x0, y0,
    x1, y1,
    x2, y2,
@@ -10659,13 +10264,13 @@ module perm104768(clk, next, reset, next_out,
    assign outAddr_a15[5] = addr15c[9];
    assign outAddr_a15[6] = addr15c[10];
 
-   nextReg #(114, 7) nextReg_106606(.X(next), .Y(next0), .reset(reset), .clk(clk));
+   nextReg #(114, 7) nextReg_78687(.X(next), .Y(next0), .reset(reset), .clk(clk));
 
 
-   shiftRegFIFO #(2, 1) shiftFIFO_106609(.X(next0), .Y(next_out), .clk(clk));
+   shiftRegFIFO #(2, 1) shiftFIFO_78690(.X(next0), .Y(next_out), .clk(clk));
 
 
-   memArray2048_104768 #(numBanks, logBanks, depth, logDepth, width)
+   memArray2048_76849 #(numBanks, logBanks, depth, logDepth, width)
      memSys(.inFlip(inFlip0), .outFlip(outFlip0), .next(next), .reset(reset),
         .x0(w_1_0[width+logDepth-1:logDepth]), .y0(ybuff0),
         .inAddr0(w_1_0[logDepth-1:0]),
@@ -10867,7 +10472,7 @@ module perm104768(clk, next, reset, next_out,
     switch #(logDepth) rdaddr_sw_0_7(.x0(u_0_7), .x1(u_0_15), .y0(u_1_7), .y1(u_1_15), .ctrl(rda_ctrl_st_0));
 endmodule
 
-module memArray2048_104768(next, reset,
+module memArray2048_76849(next, reset,
                 x0, y0,
                 inAddr0,
                 outAddr0,
@@ -10976,7 +10581,7 @@ module memArray2048_104768(next, reset,
    input [width-1:0]   x15;
    output [width-1:0]  y15;
    input [logDepth-1:0] inAddr15, outAddr15;
-   nextReg #(128, 7) nextReg_106614(.X(next), .Y(next0), .reset(reset), .clk(clk));
+   nextReg #(128, 7) nextReg_78695(.X(next), .Y(next0), .reset(reset), .clk(clk));
 
 
    memMod #(depth*2, width, logDepth+1) 
