@@ -2090,22 +2090,24 @@ END c_2048to16x128_shifter;
 --the 4 bit to 7 bit (hex representation) decoding
 ARCHITECTURE shift OF c_2048to16x128_shifter IS
 	SIGNAL i : INTEGER := 0;
+	SIGNAL reading_input : INTEGER := 0;
 	-- SIGNAL data_incoming : STD_LOGIC := '0';
 		
-	VARIABLE reading_input : STD_LOGIC := '0';
 	BEGIN
 
-	PROCESS(clk,samples_ready)
+	PROCESS(clk,samples_ready,reading_input)
 		BEGIN
-			IF rising_edge(samples_ready) THEN
-				reading_input := '1';
-			END IF;
-			IF rising_edge(fft_finished) THEN
+			
+			IF rising_edge(clk) THEN
+			IF (samples_ready = '1') THEN
+				reading_input <= 1;
 			END IF;
 			
-			IF (reading_input = '1') THEN	-- shift the 2048 samples into the FFT
-			--recieving_cows
-			IF rising_edge(clk) THEN
+			IF (fft_finished = '1') THEN
+			END IF;
+			
+			CASE reading_input IS	-- shift the 2048 samples into the FFT
+			WHEN 1 =>
 					CASE i IS
 					WHEN 0 =>
 						shift_out0 <= X0;
@@ -4413,17 +4415,14 @@ ARCHITECTURE shift OF c_2048to16x128_shifter IS
 						
 						i <= i + 1;	
 					WHEN OTHERS =>
-						reading_input := '0';
+						reading_input <= 0;
 						i <= 0;
 								--do-nothing
 					END CASE;
 				
-				END IF;
-				
---			END IF;
-		END IF;		
-		
-			
+				WHEN OTHERS =>
+				END CASE;
+			END IF;
 		
 	END PROCESS;
 
