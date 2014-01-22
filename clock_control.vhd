@@ -17,12 +17,13 @@ END clock_control;
 
 ARCHITECTURE control OF clock_control IS
 	BEGIN
-	PROCESS(clock)
+	PROCESS(clock, ready, converting)
 	BEGIN
 		CASE ready AND NOT converting IS
 		WHEN '1' =>
 			clk <= clock;
 		WHEN OTHERS =>
+			clk <= '0';
 		END CASE;
 	END PROCESS;
 END control; 

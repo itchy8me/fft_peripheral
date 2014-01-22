@@ -55,7 +55,7 @@
 // are system outputs.
 
 // The design uses a system of flag signals to indicate the
-// beginning of the input and output data streams.  The 'next'
+// beginning of the input and output data streams.  The 'nexti'
 // input (asserted high), is used to instruct the system that the
 // input stream will begin on the following cycle.
 
@@ -69,7 +69,7 @@
 
 // The system has a latency of 1563 cycles.  This means that
 // the 'next_out' will be asserted 1563 cycles after the user
-// asserts 'next'.
+// asserts 'nexti'.
 
 // The simple testbench below will demonstrate the timing for loading
 // and unloading data vectors.
@@ -81,7 +81,7 @@
 
 // Latency: 1563
 // Gap: 1431
-module dft_top(clk, reset, next, next_out,
+module dft_top(clk, reset, nexti, next_out,
    X0, Y0,
    X1, Y1,
    X2, Y2,
@@ -116,7 +116,7 @@ module dft_top(clk, reset, next, next_out,
    X31, Y31);
 
    output next_out;
-   input clk, reset, next;
+   input clk, reset, nexti;
 
    input [9:0] X0,
       X1,
@@ -347,11 +347,11 @@ module dft_top(clk, reset, next, next_out,
    assign Y30 = t2_30;
    assign t0_31 = X31;
    assign Y31 = t2_31;
-   assign next_0 = next;
+   assign next_0 = nexti;
    assign next_out = next_2;
 
 // latency=132, gap=128
-   rc71225 stage0(.clk(clk), .reset(reset), .next(next_0), .next_out(next_1),
+   rc71225 stage0(.clk(clk), .reset(reset), .nexti(next_0), .next_out(next_1),
     .X0(t0_0), .Y0(t1_0),
     .X1(t0_1), .Y1(t1_1),
     .X2(t0_2), .Y2(t1_2),
@@ -387,7 +387,7 @@ module dft_top(clk, reset, next, next_out,
 
 
 // latency=1431, gap=1431
-   ICompose_76855 IComposeInst78650(.next(next_1), .clk(clk), .reset(reset), .next_out(next_2),
+   ICompose_76855 IComposeInst78650(.nexti(next_1), .clk(clk), .reset(reset), .next_out(next_2),
        .X0(t1_0), .Y0(t2_0),
        .X1(t1_1), .Y1(t2_1),
        .X2(t1_2), .Y2(t2_2),
@@ -426,7 +426,7 @@ endmodule
 
 // Latency: 132
 // Gap: 128
-module rc71225(clk, reset, next, next_out,
+module rc71225(clk, reset, nexti, next_out,
    X0, Y0,
    X1, Y1,
    X2, Y2,
@@ -461,7 +461,7 @@ module rc71225(clk, reset, next, next_out,
    X31, Y31);
 
    output next_out;
-   input clk, reset, next;
+   input clk, reset, nexti;
 
    input [9:0] X0,
       X1,
@@ -626,7 +626,7 @@ module rc71225(clk, reset, next, next_out,
     .x13(t13), .y13(s13),
     .x14(t14), .y14(s14),
     .x15(t15), .y15(s15),
-   .clk(clk), .next(next), .next_out(next_out), .reset(reset)
+   .clk(clk), .nexti(nexti), .next_out(next_out), .reset(reset)
 );
 
 
@@ -635,7 +635,7 @@ endmodule
 
 // Latency: 132
 // Gap: 128
-module perm71223(clk, next, reset, next_out,
+module perm71223(clk, nexti, reset, next_out,
    x0, y0,
    x1, y1,
    x2, y2,
@@ -706,7 +706,7 @@ module perm71223(clk, next, reset, next_out,
    input [width-1:0]  x15;
    output [width-1:0]  y15;
    wire [width-1:0]  ybuff15;
-   input 	      clk, next, reset;
+   input 	      clk, nexti, reset;
    output 	     next_out;
 
    wire    	     next0;
@@ -1424,14 +1424,14 @@ module perm71223(clk, next, reset, next_out,
    assign outAddr_a15[5] = addr15c[9];
    assign outAddr_a15[6] = addr15c[10];
 
-   nextReg #(124, 7) nextReg_78656(.X(next), .Y(next0), .reset(reset), .clk(clk));
+   nextReg #(124, 7) nextReg_78656(.X(nexti), .Y(next0), .reset(reset), .clk(clk));
 
 
    shiftRegFIFO #(8, 1) shiftFIFO_78659(.X(next0), .Y(next_out), .clk(clk));
 
 
    memArray2048_71223 #(numBanks, logBanks, depth, logDepth, width)
-     memSys(.inFlip(inFlip3), .outFlip(outFlip3), .next(next), .reset(reset),
+     memSys(.inFlip(inFlip3), .outFlip(outFlip3), .nexti(nexti), .reset(reset),
         .x0(w_4_0[width+logDepth-1:logDepth]), .y0(ybuff0),
         .inAddr0(w_4_0[logDepth-1:0]),
         .outAddr0(u_4_0), 
@@ -1549,7 +1549,7 @@ module perm71223(clk, next, reset, next_out,
          if (inCount == 127) begin
             inFlip0 <= ~inFlip0;
          end
-         if (next == 1) begin
+         if (nexti == 1) begin
             if (inCount >= 123)
                inFlip0 <= ~inFlip0;
             inCount <= 0;
@@ -2124,7 +2124,7 @@ module perm71223(clk, next, reset, next_out,
     switch #(logDepth) rdaddr_sw_3_7(.x0(u_3_14_pipe), .x1(u_3_15_pipe), .y0(u_4_14), .y1(u_4_15), .ctrl(rda_ctrl_st_3));
 endmodule
 
-module memArray2048_71223(next, reset,
+module memArray2048_71223(nexti, reset,
                 x0, y0,
                 inAddr0,
                 outAddr0,
@@ -2181,7 +2181,7 @@ module memArray2048_71223(next, reset,
    parameter logDepth = 7;
    parameter width = 20;
          
-   input     clk, next, reset;
+   input     clk, nexti, reset;
    input    inFlip, outFlip;
    wire    next0;
    
@@ -2233,7 +2233,7 @@ module memArray2048_71223(next, reset,
    input [width-1:0]   x15;
    output [width-1:0]  y15;
    input [logDepth-1:0] inAddr15, outAddr15;
-   nextReg #(128, 7) nextReg_78664(.X(next), .Y(next0), .reset(reset), .clk(clk));
+   nextReg #(128, 7) nextReg_78664(.X(nexti), .Y(next0), .reset(reset), .clk(clk));
 
 
    memMod #(depth*2, width, logDepth+1) 
@@ -2393,7 +2393,7 @@ endmodule
 
 // Latency: 1431
 // Gap: 1431
-module ICompose_76855(clk, reset, next, next_out,
+module ICompose_76855(clk, reset, nexti, next_out,
       X0, Y0,
       X1, Y1,
       X2, Y2,
@@ -2429,7 +2429,7 @@ module ICompose_76855(clk, reset, next, next_out,
 
    output next_out;
    reg next_out;
-   input clk, reset, next;
+   input clk, reset, nexti;
 
    reg [7:0] cycle_count;
    reg [7:0] count;
@@ -2604,7 +2604,7 @@ module ICompose_76855(clk, reset, next, next_out,
    wire int_next_out;
    reg [4:0] i1;
 
-   statementList76853 instList78669 (.clk(clk), .reset(reset), .next(int_next), .next_out(int_next_out),
+   statementList76853 instList78669 (.clk(clk), .reset(reset), .nexti(int_next), .next_out(int_next_out),
       .i1_in(i1),
     .X0(s0), .Y0(t0),
     .X1(s1), .Y1(t1),
@@ -2717,7 +2717,7 @@ module ICompose_76855(clk, reset, next, next_out,
             0: begin
                i1 <= 10;
                cycle_count <= 0;
-               if (next == 1) begin
+               if (nexti == 1) begin
                   int_next <= 1;
                   iri_state <= 1;
                   
@@ -2794,7 +2794,7 @@ module ICompose_76855(clk, reset, next, next_out,
          case (state)
             0: begin
                count <= 0;
-               if (next == 1) begin
+               if (nexti == 1) begin
                   state <= 1;
                   count <= 0;
                   s0 <= X0; 
@@ -2947,7 +2947,7 @@ endmodule
 
 // Latency: 129
 // Gap: 128
-module statementList76853(clk, reset, next, next_out,
+module statementList76853(clk, reset, nexti, next_out,
    i1_in,
    X0, Y0,
    X1, Y1,
@@ -2983,7 +2983,7 @@ module statementList76853(clk, reset, next, next_out,
    X31, Y31);
 
    output next_out;
-   input clk, reset, next;
+   input clk, reset, nexti;
 
    input [4:0] i1_in;
    input [9:0] X0,
@@ -3250,13 +3250,13 @@ module statementList76853(clk, reset, next, next_out,
    assign Y30 = t3_30;
    assign t0_31 = X31;
    assign Y31 = t3_31;
-   assign next_0 = next;
+   assign next_0 = nexti;
    assign next_out = next_3;
 
    assign i1_0 = i1_in;
 
 // latency=11, gap=128
-   DirSum_76252 DirSumInst78672(.next(next_0), .clk(clk), .reset(reset), .next_out(next_1),
+   DirSum_76252 DirSumInst78672(.nexti(next_0), .clk(clk), .reset(reset), .next_out(next_1),
 .i1(i1_0),
        .X0(t0_0), .Y0(t1_0),
        .X1(t0_1), .Y1(t1_1),
@@ -3329,7 +3329,7 @@ module statementList76853(clk, reset, next, next_out,
 
 
 // latency=116, gap=128
-   rc76851 instrc78674(.clk(clk), .reset(reset), .next(next_2), .next_out(next_3),
+   rc76851 instrc78674(.clk(clk), .reset(reset), .nexti(next_2), .next_out(next_3),
     .X0(t2_0), .Y0(t3_0),
     .X1(t2_1), .Y1(t3_1),
     .X2(t2_2), .Y2(t3_2),
@@ -3368,7 +3368,7 @@ endmodule
 
 // Latency: 11
 // Gap: 128
-module DirSum_76252(clk, reset, next, next_out,
+module DirSum_76252(clk, reset, nexti, next_out,
       i1,
       X0, Y0,
       X1, Y1,
@@ -3404,7 +3404,7 @@ module DirSum_76252(clk, reset, next, next_out,
       X31, Y31);
 
    output next_out;
-   input clk, reset, next;
+   input clk, reset, nexti;
 
    input [4:0] i1;
    reg [6:0] i2;
@@ -3480,7 +3480,7 @@ module DirSum_76252(clk, reset, next, next_out,
          i2 <= 0;
       end
       else begin
-         if (next == 1)
+         if (nexti == 1)
             i2 <= 0;
          else if (i2 == 127)
             i2 <= 0;
@@ -3489,7 +3489,7 @@ module DirSum_76252(clk, reset, next, next_out,
       end
    end
 
-   codeBlock71227 codeBlockIsnt78675(.clk(clk), .reset(reset), .next_in(next), .next_out(next_out),
+   codeBlock71227 codeBlockIsnt78675(.clk(clk), .reset(reset), .next_in(nexti), .next_out(next_out),
 .i2_in(i2),
 .i1_in(i1),
        .X0_in(X0), .Y0(Y0),
@@ -7700,7 +7700,7 @@ module codeBlock71227(clk, reset, next_in, next_out,
    output next_out;
    input clk, reset, next_in;
 
-   reg next;
+   reg nexti;
    input [6:0] i2_in;
    reg [6:0] i2;
    input [4:0] i1_in;
@@ -7805,7 +7805,7 @@ module codeBlock71227(clk, reset, next_in, next_out,
       Y30,
       Y31;
 
-   shiftRegFIFO #(10, 1) shiftFIFO_78678(.X(next), .Y(next_out), .clk(clk));
+   shiftRegFIFO #(10, 1) shiftFIFO_78678(.X(nexti), .Y(next_out), .clk(clk));
 
 
    wire  [10:0] a450;
@@ -8526,7 +8526,7 @@ module codeBlock71227(clk, reset, next_in, next_out,
          X29 <= X29_in;
          X30 <= X30_in;
          X31 <= X31_in;
-         next <= next_in;
+         nexti <= next_in;
          tm99 <= a453;
          tm100 <= a533;
          tm107 <= a534;
@@ -8867,7 +8867,7 @@ module codeBlock76254(clk, reset, next_in, next_out,
    output next_out;
    input clk, reset, next_in;
 
-   reg next;
+   reg nexti;
 
    input [9:0] X0_in,
       X1_in,
@@ -8968,7 +8968,7 @@ module codeBlock76254(clk, reset, next_in, next_out,
       Y30,
       Y31;
 
-   shiftRegFIFO #(1, 1) shiftFIFO_78681(.X(next), .Y(next_out), .clk(clk));
+   shiftRegFIFO #(1, 1) shiftFIFO_78681(.X(nexti), .Y(next_out), .clk(clk));
 
 
    wire signed [9:0] a65;
@@ -9268,14 +9268,14 @@ module codeBlock76254(clk, reset, next_in, next_out,
          X29 <= X29_in;
          X30 <= X30_in;
          X31 <= X31_in;
-         next <= next_in;
+         nexti <= next_in;
       end
    end
 endmodule
 
 // Latency: 116
 // Gap: 128
-module rc76851(clk, reset, next, next_out,
+module rc76851(clk, reset, nexti, next_out,
    X0, Y0,
    X1, Y1,
    X2, Y2,
@@ -9310,7 +9310,7 @@ module rc76851(clk, reset, next, next_out,
    X31, Y31);
 
    output next_out;
-   input clk, reset, next;
+   input clk, reset, nexti;
 
    input [9:0] X0,
       X1,
@@ -9475,7 +9475,7 @@ module rc76851(clk, reset, next, next_out,
     .x13(t13), .y13(s13),
     .x14(t14), .y14(s14),
     .x15(t15), .y15(s15),
-   .clk(clk), .next(next), .next_out(next_out), .reset(reset)
+   .clk(clk), .nexti(nexti), .next_out(next_out), .reset(reset)
 );
 
 
@@ -9484,7 +9484,7 @@ endmodule
 
 // Latency: 116
 // Gap: 128
-module perm76849(clk, next, reset, next_out,
+module perm76849(clk, nexti, reset, next_out,
    x0, y0,
    x1, y1,
    x2, y2,
@@ -9555,7 +9555,7 @@ module perm76849(clk, next, reset, next_out,
    input [width-1:0]  x15;
    output [width-1:0]  y15;
    wire [width-1:0]  ybuff15;
-   input 	      clk, next, reset;
+   input 	      clk, nexti, reset;
    output 	     next_out;
 
    wire    	     next0;
@@ -10264,14 +10264,14 @@ module perm76849(clk, next, reset, next_out,
    assign outAddr_a15[5] = addr15c[9];
    assign outAddr_a15[6] = addr15c[10];
 
-   nextReg #(114, 7) nextReg_78687(.X(next), .Y(next0), .reset(reset), .clk(clk));
+   nextReg #(114, 7) nextReg_78687(.X(nexti), .Y(next0), .reset(reset), .clk(clk));
 
 
    shiftRegFIFO #(2, 1) shiftFIFO_78690(.X(next0), .Y(next_out), .clk(clk));
 
 
    memArray2048_76849 #(numBanks, logBanks, depth, logDepth, width)
-     memSys(.inFlip(inFlip0), .outFlip(outFlip0), .next(next), .reset(reset),
+     memSys(.inFlip(inFlip0), .outFlip(outFlip0), .nexti(nexti), .reset(reset),
         .x0(w_1_0[width+logDepth-1:logDepth]), .y0(ybuff0),
         .inAddr0(w_1_0[logDepth-1:0]),
         .outAddr0(u_1_0), 
@@ -10380,7 +10380,7 @@ module perm76849(clk, next, reset, next_out,
          if (inCount == 127) begin
             inFlip0 <= ~inFlip0;
          end
-         if (next == 1) begin
+         if (nexti == 1) begin
             if (inCount >= 113)
                inFlip0 <= ~inFlip0;
             inCount <= 0;
@@ -10472,7 +10472,7 @@ module perm76849(clk, next, reset, next_out,
     switch #(logDepth) rdaddr_sw_0_7(.x0(u_0_7), .x1(u_0_15), .y0(u_1_7), .y1(u_1_15), .ctrl(rda_ctrl_st_0));
 endmodule
 
-module memArray2048_76849(next, reset,
+module memArray2048_76849(nexti, reset,
                 x0, y0,
                 inAddr0,
                 outAddr0,
@@ -10529,7 +10529,7 @@ module memArray2048_76849(next, reset,
    parameter logDepth = 7;
    parameter width = 20;
          
-   input     clk, next, reset;
+   input     clk, nexti, reset;
    input    inFlip, outFlip;
    wire    next0;
    
@@ -10581,7 +10581,7 @@ module memArray2048_76849(next, reset,
    input [width-1:0]   x15;
    output [width-1:0]  y15;
    input [logDepth-1:0] inAddr15, outAddr15;
-   nextReg #(128, 7) nextReg_78695(.X(next), .Y(next0), .reset(reset), .clk(clk));
+   nextReg #(128, 7) nextReg_78695(.X(nexti), .Y(next0), .reset(reset), .clk(clk));
 
 
    memMod #(depth*2, width, logDepth+1) 

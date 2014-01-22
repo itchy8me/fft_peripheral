@@ -2063,9 +2063,8 @@ ENTITY c_2048to16x128_shifter IS
 		X2047 : IN STD_LOGIC_VECTOR(9 DOWNTO 0) := "0000000000";
 		
 		-- enable : IN STD_LOGIC := '0';
-		fft_finished : IN STD_LOGIC := '0';
 		samples_ready : IN STD_LOGIC := '0';
-		clk : IN STD_LOGIC := '0';
+		clk_in : IN STD_LOGIC := '0';
 		
 		-- sig_next : OUT STD_LOGIC := '0';
 		shift_out0 : OUT STD_LOGIC_VECTOR(9 DOWNTO 0) := "0000000000";
@@ -2095,20 +2094,17 @@ ARCHITECTURE shift OF c_2048to16x128_shifter IS
 		
 	BEGIN
 
-	PROCESS(clk,samples_ready,reading_input)
+	PROCESS(clk_in,samples_ready,reading_input)
 		BEGIN
 			
-			IF rising_edge(clk) THEN
+			IF rising_edge(clk_in) THEN
 			IF (samples_ready = '1') THEN
 				reading_input <= 1;
 			END IF;
 			
-			IF (fft_finished = '1') THEN
-			END IF;
-			
 			CASE reading_input IS	-- shift the 2048 samples into the FFT
 			WHEN 1 =>
-					ASE i IS
+					CASE i IS
 					WHEN 0 =>
 						shift_out0 <= X0;
 						shift_out1 <= X1;
