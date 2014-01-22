@@ -4305,18 +4305,21 @@ ARCHITECTURE interconnect OF fft_peripheral IS
 		V15 : OUT STD_LOGIC_VECTOR(7 DOWNTO 0) := (others => '0');
 		
 		next_bin_set : OUT STD_LOGIC := '0'; -- signal receiving end new bin set data available.
-		incoming128set : IN STD_LOGIC := '0'; -- 128 sets of 16 sample incoming
+		incoming128sets : IN STD_LOGIC := '0'; -- 128 sets of 16 sample incoming (signaled by next out from fft)
+		fft_finished : OUT STD_LOGIC := '0'; -- The fft data has left the process
 		clk_in : IN STD_LOGIC := '0';
 		
-		converting : OUT STD_LOGIC := '0');
+		converting : OUT STD_LOGIC := '0');	-- to stop the clock of fft and input shifter
 	END COMPONENT; -- c_10bit2char_vga_H256
 	
 	BEGIN
 	--	dft_top0 : dft_top
 	--	PORT MAP(
 	--	);
+		--dft_top0 : dft_top
+		--PORT MAP();
 		
-		c_2048to16x128_shifter0 : c_2048to16x128_shifter
+		c_2048to16x128_shifter0: c_2048to16x128_shifter
 		PORT MAP(
 		X0 => X0,
 		X1 => X1,
@@ -6370,6 +6373,5 @@ ARCHITECTURE interconnect OF fft_peripheral IS
 	
 --	clock_control0 : clock_control
 --	PORT MAP();
-	
-		-- start_shiftin <= 
+-- start_shiftin <= 
 END interconnect;

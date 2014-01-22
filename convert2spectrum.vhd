@@ -62,6 +62,7 @@ ENTITY convert2spectrum IS
 		
 		next_bin_set : OUT STD_LOGIC := '0'; -- signal receiving end new bin set data available.
 		incoming128sets : IN STD_LOGIC := '0'; -- 128 sets of 16 sample incoming (signaled by next out from fft)
+		fft_finished : OUT STD_LOGIC := '0'; -- The fft data has left the process
 		clk_in : IN STD_LOGIC := '0';
 		
 		converting : OUT STD_LOGIC := '0');	-- to stop the clock of fft and input shifter
@@ -241,6 +242,12 @@ ARCHITECTURE convert of convert2spectrum IS
 						convert := '1';
 						step := 0;
 						converting <= '1';
+						count_fft := count_fft + 1; -- count to 128 then ssert fft_finished high
+						
+						IF (count_fft = 128) THEN
+							fft_finished <= '1';
+							count_fft := 0;
+						END IF;
 					WHEN OTHERS =>
 						step := step + 1;
 				END CASE;
